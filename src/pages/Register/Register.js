@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
-import { GoogleAuthProvider } from "firebase/auth";
+import { GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -16,6 +16,7 @@ const Register = () => {
     useContext(AuthContext);
 
   const googleProvider = new GoogleAuthProvider();
+  const githubProvider = new GithubAuthProvider();
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -40,9 +41,20 @@ const Register = () => {
     }
   };
 
-  const signUpWithGoogle = (e) => {
+  const signInWithGoogle = (e) => {
     e.preventDefault();
     providerLogin(googleProvider)
+      .then((result) => {
+        navigate("/home");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const signInWithGithub = (e) => {
+    e.preventDefault();
+    providerLogin(githubProvider)
       .then((result) => {
         navigate("/home");
       })
@@ -66,10 +78,10 @@ const Register = () => {
     <div className="w-40 mx-auto mt-3">
       <p className="mt-2">Signup using these platform!</p>
       <div className="d-flex justify-content-center gap-3">
-        <Button variant="info" onClick={signUpWithGoogle}>
+        <Button variant="info" onClick={signInWithGoogle}>
           <FcGoogle />
         </Button>
-        <Button variant="info">
+        <Button variant="info" onClick={signInWithGithub}>
           <FaGithub />
         </Button>
       </div>
