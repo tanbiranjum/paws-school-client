@@ -36,6 +36,9 @@ const NavComponent = () => {
                   <NavDropdown.Item as={Link} to="/profile">
                     Profile
                   </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/register">
+                    Register
+                  </NavDropdown.Item>
                   <NavDropdown.Item as={Link} to="/login">
                     Login
                   </NavDropdown.Item>
@@ -45,7 +48,9 @@ const NavComponent = () => {
                   </NavDropdown.Item>
                 </NavDropdown>
               </div>
-              <Button variant="dark" size="sm" className="py-0 px-4 ms-4">Dark</Button>
+              <Button variant="dark" size="sm" className="py-0 px-4 ms-4">
+                Dark
+              </Button>
             </Nav>
           </Navbar.Collapse>
         </Container>
