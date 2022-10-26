@@ -43,24 +43,34 @@ const NavComponent = () => {
                 FAQ
               </Nav.Link>
               <div className="ms-auto">
-                <NavDropdown title="Profile" id="basic-nav-dropdown">
-                  <NavDropdown.Item as={Link} to="/profile">
-                    Profile
-                  </NavDropdown.Item>
-                  <NavDropdown.Item as={Link} to="/register">
-                    Register
-                  </NavDropdown.Item>
-                  <NavDropdown.Item as={Link} to="/login">
-                    Login
-                  </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item
-                    as={Link}
-                    to="/logout"
-                    onClick={handleLogout}
-                  >
-                    Logout
-                  </NavDropdown.Item>
+                <NavDropdown title={user?.uid ? "Profile" : "Login"} id="basic-nav-dropdown">
+                  {user?.uid && (
+                    <NavDropdown.Item as={Link} to="/profile">
+                      Profile
+                    </NavDropdown.Item>
+                  )}
+                  {!user && (
+                    <NavDropdown.Item as={Link} to="/register">
+                      Register
+                    </NavDropdown.Item>
+                  )}
+                  {!user && (
+                    <NavDropdown.Item as={Link} to="/login">
+                      Login
+                    </NavDropdown.Item>
+                  )}
+                  {user?.uid && (
+                    <>
+                      <NavDropdown.Divider />
+                      <NavDropdown.Item
+                        as={Link}
+                        to="/logout"
+                        onClick={handleLogout}
+                      >
+                        Logout
+                      </NavDropdown.Item>
+                    </>
+                  )}
                 </NavDropdown>
               </div>
               <Button variant="dark" size="sm" className="py-0 px-4 ms-4">
