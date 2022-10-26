@@ -2,15 +2,28 @@ import React from "react";
 import { Col, Row, Button, Card, Badge } from "react-bootstrap";
 import { useLoaderData } from "react-router-dom";
 import { FaDownload } from "react-icons/fa";
+import { createRef } from "react";
+import Pdf from "react-to-pdf";
 
 const CourseDetails = () => {
   const course = useLoaderData()[0];
+  const ref = createRef();
+
+  const options = {
+    orientation: "landscape",
+  };
+
   return (
     <div className="mt-5" style={{ height: "64vh" }}>
-      <Button variant="primary" className="mb-4">
-        Download PDF<FaDownload className="ms-2"/>
-      </Button>
-      <Row>
+      <Pdf targetRef={ref} filename="course-description.pdf" options={options}>
+        {({ toPdf }) => (
+          <Button variant="primary" className="mb-4" onClick={toPdf}>
+            Download PDF
+            <FaDownload className="ms-2" />
+          </Button>
+        )}
+      </Pdf>
+      <Row ref={ref}>
         <Col xs={4}>
           {console.log(course)}
           <img src={course.image_url} alt="course image" />
