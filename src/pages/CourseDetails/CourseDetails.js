@@ -1,6 +1,6 @@
 import React from "react";
 import { Col, Row, Button, Card, Badge } from "react-bootstrap";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { FaDownload } from "react-icons/fa";
 import { createRef } from "react";
 import Pdf from "react-to-pdf";
@@ -41,7 +41,12 @@ const CourseDetails = () => {
               <Card.Subtitle>Author: {course.author}</Card.Subtitle>
               <Card.Text className="mt-2">{course.description}</Card.Text>
               <Card.Text>Price: ${course.price}</Card.Text>
-              <Button variant="primary" style={{ marginTop: "-10px" }}>
+              <Button
+                variant="primary"
+                style={{ marginTop: "-10px" }}
+                as={Link}
+                to={`/checkout/${course.id}`}
+              >
                 Buy ${course.price}
               </Button>
             </Card.Body>

@@ -42,8 +42,20 @@ const NavComponent = () => {
               <Nav.Link as={Link} to="/courses">
                 FAQ
               </Nav.Link>
-              <div className="ms-auto">
-                <NavDropdown title={user?.uid ? "Profile" : "Login"} id="basic-nav-dropdown">
+              <div className="ms-auto d-flex align-items-center">
+                {user?.uid && (
+                  <img
+                    src={user?.photoURL}
+                    alt="client image"
+                    style={{ width: "40px" }}
+                    className="rounded-circle"
+                    title={user?.displayName}
+                  />
+                )}
+                <NavDropdown
+                  title={user?.uid ? "Profile" : "Login"}
+                  id="basic-nav-dropdown"
+                >
                   {user?.uid && (
                     <NavDropdown.Item as={Link} to="/profile">
                       Profile
