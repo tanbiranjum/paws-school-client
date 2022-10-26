@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../../layout/Main";
+import CourseDetails from "../../pages/CourseDetails/CourseDetails";
 import Courses from "../../pages/Courses/Courses";
 import ErrorPage from "../../pages/ErrorPage/ErrorPage";
 import Home from "../../pages/Home/Home";
@@ -13,8 +14,22 @@ const router = createBrowserRouter([
     element: <Main />,
     children: [
       {
+        path: "/",
+        element: <Home />,
+        loader: async () => {
+          return fetch(
+            "https://paws-school-server-tanbiranjum.vercel.app/course"
+          );
+        },
+      },
+      {
         path: "/home",
         element: <Home />,
+        loader: async () => {
+          return fetch(
+            "https://paws-school-server-tanbiranjum.vercel.app/course"
+          );
+        },
       },
       {
         path: "/login",
@@ -31,6 +46,24 @@ const router = createBrowserRouter([
             <Courses />
           </PrivateRoutes>
         ),
+        loader: async () => {
+          return fetch(
+            "https://paws-school-server-tanbiranjum.vercel.app/category"
+          );
+        },
+      },
+      {
+        path: "/courses/:id",
+        element: (
+          <PrivateRoutes>
+            <CourseDetails />
+          </PrivateRoutes>
+        ),
+        loader: async ({ params }) => {
+          return fetch(
+            `https://paws-school-server-tanbiranjum.vercel.app/course/${params.id}`
+          );
+        },
       },
       {
         path: "*",
