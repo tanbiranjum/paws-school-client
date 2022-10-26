@@ -1,13 +1,24 @@
 import React from "react";
+import { useContext } from "react";
 import { Button } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PawLogo from "../../assets/paw.png";
+import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 
 const NavComponent = () => {
+  const { user, loading, logOut } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    logOut().then(() => {
+      navigate("/home");
+    });
+  };
   return (
     <div>
       <Navbar bg="light" expand="lg">
@@ -43,7 +54,11 @@ const NavComponent = () => {
                     Login
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item as={Link} to="/logout">
+                  <NavDropdown.Item
+                    as={Link}
+                    to="/logout"
+                    onClick={handleLogout}
+                  >
                     Logout
                   </NavDropdown.Item>
                 </NavDropdown>

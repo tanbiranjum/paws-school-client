@@ -16,7 +16,7 @@ export const AuthContext = createContext();
 const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const providerLogin = (provider) => {
@@ -36,21 +36,27 @@ const AuthProvider = ({ children }) => {
     return updateProfile(auth.currentUser, profile);
   };
 
-  const signOut = () => {
+  const logOut = () => {
     setLoading(true);
     return signOut(auth);
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      // if (currentUser === null || currentUser.emailVerified) {
-      //   setUser(currentUser);
-      // }
-      if (currentUser) {
-        setUser(currentUser);
-      }
-      setLoading(false);
-    }, []);
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (currentUser) => {
+        // if (currentUser === null || currentUser.emailVerified) {
+        //   setUser(currentUser);
+        // }
+        if (currentUser) {
+          setUser(currentUser);
+        } else {
+          setUser(null);
+        }
+        setLoading(false);
+      },
+      []
+    );
 
     return () => {
       unsubscribe();
@@ -65,7 +71,7 @@ const AuthProvider = ({ children }) => {
     signInWithEmail,
     updateUserProfile,
     providerLogin,
-    signOut,
+    logOut,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

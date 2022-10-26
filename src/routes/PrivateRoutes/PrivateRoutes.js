@@ -1,10 +1,10 @@
 import React from "react";
 import { useContext } from "react";
 import { Navigate } from "react-router-dom";
-import AuthProvider from "../../contexts/AuthProvider/AuthProvider";
+import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 
 const PrivateRoutes = ({ children }) => {
-  const { user, loading } = useContext(AuthProvider);
+  const { user, loading } = useContext(AuthContext);
 
   if (loading) {
     return <div>This is a spinner</div>;
