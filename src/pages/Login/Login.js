@@ -8,23 +8,21 @@ import { FaGithub } from "react-icons/fa";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import { GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
 import { useContext } from "react";
+import { useForm } from "react-hook-form";
 
 const Login = () => {
+  const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const { providerLogin, signInWithEmail } = useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const email = form.email.value;
-    const password = form.password.value;
+  const handleLogin = (data) => {
+    const { email, password } = data;
     signInWithEmail(email, password)
-      .then((result) => {
+      .then(() => {
         setError("");
-        form.reset();
         navigate("/home");
       })
       .catch((error) => {
@@ -36,7 +34,7 @@ const Login = () => {
   const signInWithGoogle = (e) => {
     e.preventDefault();
     providerLogin(googleProvider)
-      .then((result) => {
+      .then(() => {
         navigate("/home");
       })
       .catch((error) => {
@@ -66,7 +64,7 @@ const Login = () => {
         </Button>
       </div>
       <p className="text-center">Or</p>
-      <Form onSubmit={handleLogin}>
+      <Form onSubmit={handleSubmit(handleLogin)}>
         {error && <Form.Text className="text-danger">{error}</Form.Text>}
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
@@ -74,6 +72,7 @@ const Login = () => {
             type="email"
             name="email"
             placeholder="Enter email"
+            {...register("email")}
             required
           />
         </Form.Group>
@@ -83,6 +82,7 @@ const Login = () => {
             type="password"
             name="password"
             placeholder="Password"
+            {...register("password")}
           />
         </Form.Group>
         <Button variant="primary" type="submit">
