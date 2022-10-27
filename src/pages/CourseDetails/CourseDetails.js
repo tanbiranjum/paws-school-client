@@ -47,7 +47,7 @@ const CourseDetails = () => {
                 as={Link}
                 to={`/checkout/${course.id}`}
               >
-                Buy ${course.price}
+                Get premium access
               </Button>
             </Card.Body>
           </Card>

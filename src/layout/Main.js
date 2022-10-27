@@ -8,7 +8,7 @@ const Main = () => {
   return (
     <div>
       <NavComponent />
-      <Container>
+      <Container style={{ minHeight: "70vh" }}>
         <Outlet />
       </Container>
       <Footer />

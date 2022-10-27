@@ -8,6 +8,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link, useNavigate } from "react-router-dom";
 import PawLogo from "../../assets/paw.png";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
+import { FaUser } from "react-icons/fa";
 
 const NavComponent = () => {
   const { user, loading, logOut } = useContext(AuthContext);
@@ -18,6 +19,10 @@ const NavComponent = () => {
     logOut().then(() => {
       navigate("/home");
     });
+  };
+
+  const handleBrokenImg = (e) => {
+    e.target.src = "https://ik.imagekit.io/localghost/avatar_uKuSwHPe6.png";
   };
   return (
     <div>
@@ -50,6 +55,7 @@ const NavComponent = () => {
                     style={{ width: "40px" }}
                     className="rounded-circle"
                     title={user?.displayName}
+                    onError={handleBrokenImg}
                   />
                 )}
                 <NavDropdown

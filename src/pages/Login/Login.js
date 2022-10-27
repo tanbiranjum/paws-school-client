@@ -21,11 +21,16 @@ const Login = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    signInWithEmail(email, password).then((result) => {
-      setError("");
-      form.reset();
-      navigate("/home");
-    });
+    signInWithEmail(email, password)
+      .then((result) => {
+        setError("");
+        form.reset();
+        navigate("/home");
+      })
+      .catch((error) => {
+        setError("Email or Password doesn't match!");
+        console.log(error);
+      });
   };
 
   const signInWithGoogle = (e) => {
@@ -62,6 +67,7 @@ const Login = () => {
       </div>
       <p className="text-center">Or</p>
       <Form onSubmit={handleLogin}>
+        {error && <Form.Text className="text-danger">{error}</Form.Text>}
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
