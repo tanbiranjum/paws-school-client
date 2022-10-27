@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
@@ -90,6 +90,9 @@ const Login = () => {
           <Button variant="primary" type="submit">
             Login
           </Button>
+          <Form.Text className="d-block">
+            Don't have an account? <Link to="/register">Register</Link> now!
+          </Form.Text>
         </Form>
       </Col>
     </Row>

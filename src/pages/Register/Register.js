@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
@@ -144,6 +144,9 @@ const Register = () => {
           <Button variant="primary" type="submit">
             Register
           </Button>
+          <Form.Text className="d-block">
+            Already have an account? <Link to="/login">Login</Link> now!
+          </Form.Text>
         </Form>
       </Col>
     </Row>
