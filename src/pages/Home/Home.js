@@ -44,7 +44,7 @@ const Home = () => {
           xl={5}
           className="d-flex flex-column align-items-center mt-xs-5"
         >
-          <h4 className="text-uppercase">
+          <h4 className="text-uppercase text-center">
             Your Pet Needs Your Attention & Care
           </h4>
           <img src={catPet} alt="cat" style={{ width: "18rem" }} />
