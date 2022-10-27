@@ -2,18 +2,16 @@ import React from "react";
 import { useState } from "react";
 import { Button, Form, Toast, ToastContainer } from "react-bootstrap";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
+import { useForm } from "react-hook-form";
 import { useContext } from "react";
 
 const Profile = () => {
+  const { register, handleSubmit } = useForm();
   const { user, updateUserProfile } = useContext(AuthContext);
   const [error, setError] = useState(null);
   const [showToast, setShowToast] = useState(false);
-  const handleUpdateProfile = (e) => {
-    const form = e.target;
-    const displayName = form.displayName.value;
-    const photoURL = form.photoURL.value;
-    e.preventDefault();
-    updateUserProfile({ displayName, photoURL })
+  const handleUpdateProfile = (data) => {
+    updateUserProfile(data)
       .then(() => {
         setShowToast(true);
       })
@@ -24,7 +22,7 @@ const Profile = () => {
   return (
     <div className="w-40 mx-auto mt-5">
       <p className="mt-2 fw-bold fs-5">Update Profile</p>
-      <Form onSubmit={handleUpdateProfile}>
+      <Form onSubmit={handleSubmit(handleUpdateProfile)}>
         {error && <Form.Text className="text-danger">{error}</Form.Text>}
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Profile URL</Form.Label>
@@ -33,6 +31,7 @@ const Profile = () => {
             name="photoURL"
             placeholder="Your photo url"
             defaultValue={user?.photoURL}
+            {...register("photoURL")}
             required
           />
         </Form.Group>
@@ -42,6 +41,7 @@ const Profile = () => {
             type="text"
             name="displayName"
             placeholder="Your display name"
+            {...register("displayName")}
             defaultValue={user?.displayName}
           />
         </Form.Group>
