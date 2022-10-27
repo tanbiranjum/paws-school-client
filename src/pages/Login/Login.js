@@ -9,6 +9,7 @@ import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import { GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { Col, Row } from "react-bootstrap";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
@@ -53,43 +54,45 @@ const Login = () => {
       });
   };
   return (
-    <div className="w-40 mx-auto mt-3">
-      <p className="mt-2">Login using these platform!</p>
-      <div className="d-flex justify-content-center gap-3">
-        <Button variant="info" onClick={signInWithGoogle}>
-          <FcGoogle />
-        </Button>
-        <Button variant="info" onClick={signInWithGithub}>
-          <FaGithub />
-        </Button>
-      </div>
-      <p className="text-center">Or</p>
-      <Form onSubmit={handleSubmit(handleLogin)}>
-        {error && <Form.Text className="text-danger">{error}</Form.Text>}
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control
-            type="email"
-            name="email"
-            placeholder="Enter email"
-            {...register("email")}
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            name="password"
-            placeholder="Password"
-            {...register("password")}
-          />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Login
-        </Button>
-      </Form>
-    </div>
+    <Row className="justify-content-center mt-3">
+      <Col xs={10} md={7} lg={5} xl={5}>
+        <p className="mt-2">Login using these platform!</p>
+        <div className="d-flex justify-content-center gap-3">
+          <Button variant="info" onClick={signInWithGoogle}>
+            <FcGoogle />
+          </Button>
+          <Button variant="info" onClick={signInWithGithub}>
+            <FaGithub />
+          </Button>
+        </div>
+        <p className="text-center">Or</p>
+        <Form onSubmit={handleSubmit(handleLogin)}>
+          {error && <Form.Text className="text-danger">{error}</Form.Text>}
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control
+              type="email"
+              name="email"
+              placeholder="Enter email"
+              {...register("email")}
+              required
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type="password"
+              name="password"
+              placeholder="Password"
+              {...register("password")}
+            />
+          </Form.Group>
+          <Button variant="primary" type="submit">
+            Login
+          </Button>
+        </Form>
+      </Col>
+    </Row>
   );
 };
 
