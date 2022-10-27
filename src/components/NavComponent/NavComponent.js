@@ -8,10 +8,9 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link, useNavigate } from "react-router-dom";
 import PawLogo from "../../assets/paw.png";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
-import { FaUser } from "react-icons/fa";
 
 const NavComponent = () => {
-  const { user, loading, logOut } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleLogout = (e) => {
@@ -24,12 +23,17 @@ const NavComponent = () => {
   const handleBrokenImg = (e) => {
     e.target.src = "https://ik.imagekit.io/localghost/avatar_uKuSwHPe6.png";
   };
+
+  const handleToggleTheme = (e) => {
+    e.preventDefault();
+    e.target.innerText = e.target.innerText === "Light" ? "Dark" : "Light";
+  };
   return (
     <div>
       <Navbar bg="light" expand="lg">
         <Container>
-          <Navbar.Brand>
-            <img src={PawLogo} alt="paw logo" className="w-35 pe-3" />
+          <Navbar.Brand className="d-flex align-items-center" as={Link} to="/">
+            <img src={PawLogo} alt="paw logo" className="w-25 pe-3" />
             Paws School
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -47,7 +51,7 @@ const NavComponent = () => {
               <Nav.Link as={Link} to="/faq">
                 FAQ
               </Nav.Link>
-              <div className="ms-auto d-flex align-items-center">
+              <div className="ms-lg-auto mt-2 mt-lg-0 d-flex align-items-center">
                 {user?.uid && (
                   <img
                     src={user?.photoURL}
@@ -91,7 +95,12 @@ const NavComponent = () => {
                   )}
                 </NavDropdown>
               </div>
-              <Button variant="dark" size="sm" className="py-0 px-4 ms-4">
+              <Button
+                variant="dark"
+                size="sm"
+                className="py-1 px-4 ms-lg-4 mt-2 mt-lg-0 align-self-start align-self-lg-center"
+                onClick={handleToggleTheme}
+              >
                 Dark
               </Button>
             </Nav>

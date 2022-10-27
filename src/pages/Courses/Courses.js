@@ -17,7 +17,7 @@ const Courses = () => {
   }, []);
   return (
     <Row style={{ minHeight: "70vh" }}>
-      <Col xs={3} className="bg-primary">
+      <Col xs={12} xl={3} className="bg-primary">
         <h6 className="mt-2 text-white">Filter By Category</h6>
         <ListGroup className="mt-3">
           <ListGroup.Item
@@ -42,7 +42,7 @@ const Courses = () => {
             ))}
         </ListGroup>
       </Col>
-      <Col xs={9} className="bg-info py-3">
+      <Col xs={12} xl={9} className="bg-info py-3">
         <Row>
           {courses &&
             courses
@@ -56,7 +56,7 @@ const Courses = () => {
                 }
               })
               .map((course) => (
-                <Col xs={4} className="mt-2" key={course.id}>
+                <Col md={6} xl={4} className="mt-2" key={course.id}>
                   <CourseCard course={course} />
                 </Col>
               ))}

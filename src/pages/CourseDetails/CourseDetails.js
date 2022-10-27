@@ -14,7 +14,7 @@ const CourseDetails = () => {
   };
 
   return (
-    <div className="mt-5" style={{ height: "64vh" }}>
+    <div className="mt-5">
       <Pdf targetRef={ref} filename="course-description.pdf" options={options}>
         {({ toPdf }) => (
           <Button variant="primary" className="mb-4" onClick={toPdf}>
@@ -24,11 +24,7 @@ const CourseDetails = () => {
         )}
       </Pdf>
       <Row ref={ref}>
-        <Col xs={4}>
-          {console.log(course)}
-          <img src={course.image_url} alt="course image" />
-        </Col>
-        <Col xs={8}>
+        <Col xs={12}>
           <Card>
             <Card.Header>
               <Badge bg="primary" className="me-2">
@@ -36,6 +32,11 @@ const CourseDetails = () => {
               </Badge>
               <Badge bg="success">Enrolled {course.enrolled}</Badge>
             </Card.Header>
+            <Card.Img
+              variant="top"
+              src={course.image_url}
+              style={{ height: "28rem", objectFit: "cover" }}
+            ></Card.Img>
             <Card.Body>
               <Card.Title>{course.title}</Card.Title>
               <Card.Subtitle>Author: {course.author}</Card.Subtitle>
