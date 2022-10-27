@@ -40,7 +40,6 @@ const NavComponent = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto w-100">
               <Nav.Link
-                
                 as={NavLink}
                 to="/"
                 className={({ isActive }) =>
@@ -72,14 +71,16 @@ const NavComponent = () => {
               </Nav.Link>
               <div className="ms-lg-auto mt-2 mt-lg-0 d-flex align-items-center">
                 {user?.uid && (
-                  <img
-                    src={user?.photoURL}
-                    alt="client image"
-                    style={{ width: "40px" }}
-                    className="rounded-circle"
-                    title={user?.displayName}
-                    onError={handleBrokenImg}
-                  />
+                  <Link to="/profile">
+                    <img
+                      src={user?.photoURL}
+                      alt="client image"
+                      style={{ width: "40px" }}
+                      className="rounded-circle"
+                      title={user?.displayName}
+                      onError={handleBrokenImg}
+                    />
+                  </Link>
                 )}
                 <NavDropdown
                   title={user?.uid ? "Profile" : "Login"}
