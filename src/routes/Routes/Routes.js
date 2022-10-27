@@ -4,6 +4,7 @@ import Checkout from "../../pages/Checkout/Checkout";
 import CourseDetails from "../../pages/CourseDetails/CourseDetails";
 import Courses from "../../pages/Courses/Courses";
 import ErrorPage from "../../pages/ErrorPage/ErrorPage";
+import FAQ from "../../pages/FAQ/FAQ";
 import Home from "../../pages/Home/Home";
 import Login from "../../pages/Login/Login";
 import Register from "../../pages/Register/Register";
@@ -70,6 +71,10 @@ const router = createBrowserRouter([
             `https://paws-school-server-tanbiranjum.vercel.app/course/${params.id}`
           );
         },
+      },
+      {
+        path: "/faq",
+        element: <FAQ />,
       },
       {
         path: "*/*",

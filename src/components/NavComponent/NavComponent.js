@@ -41,10 +41,10 @@ const NavComponent = () => {
               <Nav.Link as={Link} to="/courses">
                 Courses
               </Nav.Link>
-              <Nav.Link as={Link} to="/courses">
+              <Nav.Link as={Link} to="/blog">
                 Blog
               </Nav.Link>
-              <Nav.Link as={Link} to="/courses">
+              <Nav.Link as={Link} to="/faq">
                 FAQ
               </Nav.Link>
               <div className="ms-auto d-flex align-items-center">
