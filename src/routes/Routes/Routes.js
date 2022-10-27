@@ -8,6 +8,7 @@ import ErrorPage from "../../pages/ErrorPage/ErrorPage";
 import FAQ from "../../pages/FAQ/FAQ";
 import Home from "../../pages/Home/Home";
 import Login from "../../pages/Login/Login";
+import Profile from "../../pages/Profile/Profile";
 import Register from "../../pages/Register/Register";
 import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
 
@@ -41,6 +42,14 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/profile",
+        element: (
+          <PrivateRoutes>
+            <Profile />
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/courses",

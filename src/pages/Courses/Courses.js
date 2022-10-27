@@ -25,6 +25,7 @@ const Courses = () => {
             onClick={() => {
               setActiveCategoryID(0);
             }}
+            className={activeCategoryID}
           >
             All Courses
           </ListGroup.Item>

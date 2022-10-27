@@ -1,9 +1,10 @@
 import React from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import HeroHeader from "../../components/HeroHeader/HeroHeader";
 import catPet from "../../assets/petcat.png";
-import { Col, Row, Card } from "react-bootstrap";
+import { Col, Row, Card, Button } from "react-bootstrap";
 import profilePic from "../../assets/profile.png";
+import CourseCard from "../../components/CourseCard/CourseCard";
 
 const Home = () => {
   const courses = useLoaderData();
@@ -38,13 +39,29 @@ const Home = () => {
             </Card.Body>
           </Card>
         </Col>
-        <Col lg={6} xl={5} className="d-flex flex-column align-items-center mt-xs-5">
+        <Col
+          lg={6}
+          xl={5}
+          className="d-flex flex-column align-items-center mt-xs-5"
+        >
           <h4 className="text-uppercase">
             Your Pet Needs Your Attention & Care
           </h4>
           <img src={catPet} alt="cat" style={{ width: "18rem" }} />
         </Col>
       </Row>
+      <h1 className="text-center mt-5">Course</h1>
+      <Row>
+        {courses &&
+          courses.slice(0, 3).map((course) => (
+            <Col md={6} xl={4} className="mt-2" key={course.id}>
+              <CourseCard course={course} />
+            </Col>
+          ))}
+      </Row>
+      <Button variant="info" as={Link} to="/courses" className="mt-3 ms-auto fw-1">
+        ALL COURSES
+      </Button>
     </div>
   );
 };

@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, NavLink } from "react-router-dom";
 import PawLogo from "../../assets/paw.png";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 
@@ -39,16 +39,35 @@ const NavComponent = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto w-100">
-              <Nav.Link as={Link} to="/">
+              <Nav.Link
+                
+                as={NavLink}
+                to="/"
+                className={({ isActive }) =>
+                  isActive ? "fw-bold text-primary" : ""
+                }
+              >
                 Home
               </Nav.Link>
-              <Nav.Link as={Link} to="/courses">
+              <Nav.Link
+                as={NavLink}
+                to="/courses"
+                className={({ isActive }) => (isActive ? "fw-bold" : "")}
+              >
                 Courses
               </Nav.Link>
-              <Nav.Link as={Link} to="/blog">
+              <Nav.Link
+                as={NavLink}
+                to="/blog"
+                className={({ isActive }) => (isActive ? "fw-bold" : "")}
+              >
                 Blog
               </Nav.Link>
-              <Nav.Link as={Link} to="/faq">
+              <Nav.Link
+                as={NavLink}
+                to="/faq"
+                className={({ isActive }) => (isActive ? "fw-bold" : "")}
+              >
                 FAQ
               </Nav.Link>
               <div className="ms-lg-auto mt-2 mt-lg-0 d-flex align-items-center">

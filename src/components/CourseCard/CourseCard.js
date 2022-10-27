@@ -19,7 +19,7 @@ const CourseCard = ({ course }) => {
         <Card.Text>{truncate(course.description)}</Card.Text>
       </Card.Body>
       <Card.Body>
-        <Button variant="primary" as={Link} to={`${course.id}`}>
+        <Button variant="primary" as={Link} to={`/courses/${course.id}`}>
           SEE MORE
         </Button>
       </Card.Body>
