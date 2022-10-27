@@ -16,9 +16,10 @@ Learn how to pet taught by the world best instructor.
 2. Bootstrap | React Bootstrap
 3. SASS
 4. Firebase
-5. React Router
-6. React Icons
-7. React-To-Pdf
+5. React Hook Form
+6. React Router
+7. React Icons
+8. React-To-Pdf
 
 ## Installation
 
