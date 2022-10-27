@@ -8,8 +8,10 @@ import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
+import { useForm } from "react-hook-form";
 
 const Register = () => {
+  const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const [error, setError] = useState();
   const { createUserWithEmail, updateUserProfile, providerLogin } =
@@ -18,21 +20,14 @@ const Register = () => {
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
 
-  const handleRegister = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const fullName = form.fullname.value;
-    const photoURL = form.photoUrl.value;
-    const email = form.email.value;
-    const password = form.password.value;
-    const cpassword = form.cpassword.value;
+  const handleRegister = (data) => {
+    const { displayName, photoURL, email, password, cpassword } = data;
 
     if (validatePassword(password, cpassword)) {
       createUserWithEmail(email, password)
-        .then((result) => {
+        .then(() => {
           setError("");
-          form.reset();
-          updateUserProfile({ displayName: fullName, photoURL });
+          updateUserProfile({ displayName, photoURL });
           navigate("/home");
         })
         .catch((error) => {
@@ -68,7 +63,7 @@ const Register = () => {
       setError("Password is not same!");
       return false;
     } else if (password.length < 6) {
-      return setError("Password can't be less than six character!");
+      setError("Password can't be less than six character!");
       return false;
     }
     return true;
@@ -86,10 +81,15 @@ const Register = () => {
         </Button>
       </div>
       <p className="text-center">Or</p>
-      <Form onSubmit={handleRegister}>
+      <Form onSubmit={handleSubmit(handleRegister)}>
         <Form.Group className="mb-3" controlId="formBasicName">
-          <Form.Label>Full Name</Form.Label>
-          <Form.Control type="text" name="fullname" placeholder="Full name" />
+          <Form.Label>Display Name</Form.Label>
+          <Form.Control
+            type="text"
+            name="displayName"
+            placeholder="Full name"
+            {...register("displayName")}
+          />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
@@ -97,6 +97,7 @@ const Register = () => {
             type="email"
             name="email"
             placeholder="Enter email"
+            {...register("email")}
             required
           />
           <Form.Text className="text-muted">
@@ -107,8 +108,9 @@ const Register = () => {
           <Form.Label>Photo URL</Form.Label>
           <Form.Control
             type="text"
-            name="photoUrl"
+            name="photoURL"
             placeholder="Photo URL"
+            {...register("photoURL")}
             required
           />
         </Form.Group>
@@ -118,6 +120,7 @@ const Register = () => {
             type="password"
             name="password"
             placeholder="Password"
+            {...register("password")}
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicConfirmPassword">
@@ -126,6 +129,7 @@ const Register = () => {
             type="password"
             name="cpassword"
             placeholder="Confirm Password"
+            {...register("cpassword")}
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
